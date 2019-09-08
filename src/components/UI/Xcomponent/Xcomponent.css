@@ -1,0 +1,15 @@
+#orangeBox {
+    background: #966909;
+    color: #fff;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;    
+    width: 25px;
+    height: 25px;
+    /* border-radius: 15px; */
+    margin-bottom: 0px;
+    margin-top:15px;
+    cursor: pointer;
+    float: right;
+  }
