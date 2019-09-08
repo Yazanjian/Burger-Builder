@@ -18,15 +18,15 @@ class Checkout extends Component {
     }
 
     continueCheckOutSummary = () => {
-        this.props.history.repalce('/Checkout/contact-data')
+        this.props.history.replace('/Checkout/contact-data')
     }
-
+//this.props.location.data
     render(){
         console.log(this.props.match.path)
         return(
             <div>
                 <CheckoutSummary
-                 ingredients={this.props.location.data}
+                 ingredients={this.state.ingredients}
                  cancelCheckoutSummary={this.cancelCheckoutSummary}
                  continueCheckOutSummary={this.continueCheckOutSummary} />
                  {/* <ContactData /> */}
