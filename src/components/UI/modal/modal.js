@@ -15,5 +15,10 @@ const Modal = (props) => (
     </Aux>
 );
 
+
+// const err = new Error();
+// err.title =" ";
+// err.message = " "
+// throw err
 // export default React.memo(Modal);
 export default Modal;
