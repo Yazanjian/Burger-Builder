@@ -15,7 +15,11 @@ class ContactData extends Component {
                     type:'text',
                     placeholder:'Your name'
                 },
-                value:''
+                value:'',
+                // validation : {
+                //     required:true
+                // },
+                // valid:false
             },
             street: { 
                 elementType:"input",
@@ -23,7 +27,8 @@ class ContactData extends Component {
                     type:'text',
                     placeholder:'Street'
                 },
-                value:''
+                value:'',
+                // valid:true
             },
             zipCode: { 
                 elementType:"input",
@@ -31,7 +36,11 @@ class ContactData extends Component {
                     type:'text',
                     placeholder:'ZIP Code'
                 },
-                value:''
+                // validation : {
+                //     required:true
+                // },
+                value:'',
+                // valid:false
             },
             country: { 
                 elementType:"input",
@@ -39,7 +48,8 @@ class ContactData extends Component {
                     type:'text',
                     placeholder:'Country'
                 },
-                value:''
+                value:'',
+                // valid:true
             },
             email: { 
                 elementType:"input",
@@ -47,7 +57,8 @@ class ContactData extends Component {
                     type:'email',
                     placeholder:'Your Email'
                 },
-                value:''
+                value:'',
+                // valid:true
             },
             deliveryMethod: { 
                 elementType:"select",
@@ -56,7 +67,8 @@ class ContactData extends Component {
                         {value:'fastest', displayValue:"Fastest"},
                         {value:'cheapest', displayValue:"Cheapest"}]
                 },
-                value:''
+                value:'',
+                // valid:true
             }
         },
         loading:false
@@ -93,6 +105,15 @@ class ContactData extends Component {
         updatedOrderForm[key] = updatedOrderFormElement;
         this.setState({orderForm:updatedOrderForm});
     }
+
+    // validityHandler(value, toCheck){
+    //     let valid = true;
+    //     if(toCheck.required && valid){
+    //         valid = value.trim() !== '';
+    //     }
+    //     return valid;
+    // }
+
 
     render(){
         const formArray = [];
