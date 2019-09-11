@@ -44,7 +44,7 @@ class ContactData extends Component {
             email: { 
                 elementType:"input",
                 elementConfig:{
-                    type:'text',
+                    type:'email',
                     placeholder:'Your Email'
                 },
                 value:''
@@ -53,8 +53,8 @@ class ContactData extends Component {
                 elementType:"select",
                 elementConfig:{
                     options:[
-                        {value:'fastest', displaValue:"Fastest"},
-                        {value:'cheapest', displaValue:"Cheapest"}]
+                        {value:'fastest', displayValue:"Fastest"},
+                        {value:'cheapest', displayValue:"Cheapest"}]
                 },
                 value:''
             }
@@ -66,9 +66,14 @@ class ContactData extends Component {
         event.preventDefault();
         
         this.setState({loading:true});
+        const contactData = {}; 
+        for(let key in this.state.orderForm){
+            contactData[key] = this.state.orderForm[key].value;
+        }
         const order={
             ingredients: this.props.ingredients,
             price: this.props.price,
+            contactData:contactData
             }
         axios.post('/orders.json',order)
         .then(Response => {
@@ -80,14 +85,36 @@ class ContactData extends Component {
         })
     }
 
+    inputChangeHandler = (event,key) => {
+        let updatedOrderForm = {...this.state.orderForm};
+        let updatedOrderFormElement = {...updatedOrderForm[key]};
+
+        updatedOrderFormElement.value = event.target.value;
+        updatedOrderForm[key] = updatedOrderFormElement;
+        this.setState({orderForm:updatedOrderForm});
+    }
+
     render(){
+        const formArray = [];
+        for(let key in this.state.orderForm){
+            formArray.push({
+                id:key,
+                config:this.state.orderForm[key]
+            })
+        };
+
+
         let form = (this.state.loading ? <Spinner /> :
-                 <form>
-                    <Input inputType="input" name="name" placeholder="Enter your name" />
-                    <Input inputType="input" type="email" name="email" placeholder="Enter your email" />
-                    <Input inputType="input" type="text" name="street" placeholder="Street Name" />                    
-                    <Input inputType="input" type="text" name="postal" placeholder="Postal Code" />
-                    <Button btnType="Success" clicked={this.handleSubmition}> ORDER </Button>
+                 <form onSubmit={this.handleSubmition}>
+                    {formArray.map(configElement => {
+                        return <Input 
+                            key={configElement.id}
+                            elementType={configElement.config.elementType}
+                            elementConfig={configElement.config.elementConfig}
+                            value={configElement.config.value}
+                            change={(event) => this.inputChangeHandler(event, configElement.id)}/> 
+                        })}
+                    <Button btnType="Success"> ORDER </Button>
                 </form>)
         return(
             <div className={styles.ContactData}>
