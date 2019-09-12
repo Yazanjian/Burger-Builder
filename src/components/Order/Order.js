@@ -9,8 +9,9 @@ const Order = (props) => {
     }
 
     const ingredientsToPrint = ingredients.map(item => {
-       return( <span style={{
-           display:'inline-block',
+       return( <span 
+            style={{
+            display:'inline-block',
             margin:'0px 8px',
             textTransform:"capitalize",
             border:'1px solid #ccc',
