@@ -21,7 +21,7 @@ const INGREDIENTS_PRICES = {
 class BurgerBuilder extends Component {
     state = {
         // ingredients:null,
-        totalPrice:4,
+        // totalPrice:4,
         // purchasable:false,
         showModal: false,
         loading:false
@@ -37,54 +37,54 @@ class BurgerBuilder extends Component {
         // })
     }
 
-    purchasableHandler = (ingredients) => {
-        if(ingredients['salad'] || 
-            ingredients['bacon'] || 
-            ingredients['cheese'] ||
-            ingredients['meat'])
-            {
-                this.setState({purchasable:true});
-            }     
-        else{
-            this.setState({purchasable:false})
-        }  
-    }
+    // purchasableHandler = (ingredients) => {
+    //     if(ingredients['salad'] || 
+    //         ingredients['bacon'] || 
+    //         ingredients['cheese'] ||
+    //         ingredients['meat'])
+    //         {
+    //             this.setState({purchasable:true});
+    //         }     
+    //     else{
+    //         this.setState({purchasable:false})
+    //     }  
+    // }
 
-    addIngredientHandler = (type) =>{
-        let oldCount = this.state.ingredients[type];
-        let newCount = oldCount + 1; 
-        let newIngrediets = {...this.state.ingredients};
-        newIngrediets[type] = newCount;
+    // addIngredientHandler = (type) =>{
+    //     let oldCount = this.state.ingredients[type];
+    //     let newCount = oldCount + 1; 
+    //     let newIngrediets = {...this.state.ingredients};
+    //     newIngrediets[type] = newCount;
 
-        let prevPrice = this.state.totalPrice; 
-        let newPrice = prevPrice + INGREDIENTS_PRICES[type];
+    //     let prevPrice = this.state.totalPrice; 
+    //     let newPrice = prevPrice + INGREDIENTS_PRICES[type];
 
-        this.setState({
-            ingredients : newIngrediets,
-            totalPrice: newPrice
-        })
-        this.purchasableHandler(newIngrediets);
-    }
+    //     this.setState({
+    //         ingredients : newIngrediets,
+    //         totalPrice: newPrice
+    //     })
+    //     this.purchasableHandler(newIngrediets);
+    // }
 
-    removeIngredientHandler = (type) => {
-        let oldCount = this.state.ingredients[type];
-        if(oldCount > 0){
-            let newCount = oldCount - 1; 
-            let newIngrediets = {...this.state.ingredients};
-            newIngrediets[type] = newCount;
+    // removeIngredientHandler = (type) => {
+    //     let oldCount = this.state.ingredients[type];
+    //     if(oldCount > 0){
+    //         let newCount = oldCount - 1; 
+    //         let newIngrediets = {...this.state.ingredients};
+    //         newIngrediets[type] = newCount;
             
-            let prevPrice = this.state.totalPrice;
-            let newPrice = prevPrice - INGREDIENTS_PRICES[type];
-            this.setState({
-                ingredients : newIngrediets,
-                totalPrice: newPrice
-            })
-            this.purchasableHandler(newIngrediets);
-        }
-        else{
-            alert('No ' + type + " to remove!");
-        }
-    } 
+    //         let prevPrice = this.state.totalPrice;
+    //         let newPrice = prevPrice - INGREDIENTS_PRICES[type];
+    //         this.setState({
+    //             ingredients : newIngrediets,
+    //             totalPrice: newPrice
+    //         })
+    //         this.purchasableHandler(newIngrediets);
+    //     }
+    //     else{
+    //         alert('No ' + type + " to remove!");
+    //     }
+    // } 
 
     showModalHandler = () => {
         this.setState({
