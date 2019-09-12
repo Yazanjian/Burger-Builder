@@ -9,14 +9,8 @@ import Modal from '../../components/UI/modal/modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders';
 import Spinner from '../../components/UI/spinner/spinner';
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/actions/actionTypes';
 
-const INGREDIENTS_PRICES = {
-    salad:0.3,
-    bacon:0.7,
-    cheese:0.5,
-    meat:1.3
-}
 
 class BurgerBuilder extends Component {
     state = {
