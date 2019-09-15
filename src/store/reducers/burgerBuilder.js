@@ -8,7 +8,7 @@ const INGREDIENTS_PRICES = {
     meat:1.3
 }
 
-
+        
 const initialState = {
     ingredients: {
         salad:0,
