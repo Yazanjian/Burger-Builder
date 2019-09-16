@@ -7,9 +7,9 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import ToProvide from '../../context/toProvide';
 import Modal from '../../components/UI/modal/modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import axios from '../../axios-orders';
 import Spinner from '../../components/UI/spinner/spinner';
 import * as actionTypes from '../../store/actions/actionTypes';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 
 class BurgerBuilder extends Component {
@@ -22,13 +22,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
-        // axios.get("ingredients.json")
-        // .then(Response => {
-        //     this.setState({ingredients:Response.data})
-        // })
-        // .catch(error => {
-        //     console.log(error);
-        // })
+        
     }
 
     // purchasableHandler = (ingredients) => {
@@ -187,8 +181,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return{
-        addIngredient: (ingName,price) => dispatch({type:actionTypes.ADD_INGREDIENT , ingredientName : ingName, price:price}),
-        removeIngredient: (ingName, price) => dispatch({type:actionTypes.REMOVE_INGREDIENT, ingredientName : ingName, price:price})
+        addIngredient: (ingName,price) => dispatch(burgerBuilderActions.addIngredient(ingName,price)),
+        removeIngredient: (ingName, price) => dispatch(burgerBuilderActions.removeIngredient(ingName,price))
     }
 }
 
