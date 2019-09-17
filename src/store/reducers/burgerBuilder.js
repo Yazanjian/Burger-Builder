@@ -61,6 +61,15 @@ const reducer = (state = initialState, action ) => {
                 purchasable : purchasable 
             }
         }
+        case actionTypes.SET_INGREDIENTS:
+        {
+            return{
+                ...state, 
+                ingredients: action.ingredients,
+                totalPrice:4,
+                purchasable:false
+            }
+        }   
         default:
             return state;
     }

@@ -10,19 +10,51 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import Spinner from '../../components/UI/spinner/spinner';
 import * as actionTypes from '../../store/actions/actionTypes';
 import * as burgerBuilderActions from '../../store/actions/index';
+import Axios from 'axios';
 
 
 class BurgerBuilder extends Component {
     state = {
-        // ingredients:null,
-        // totalPrice:4,
-        // purchasable:false,
         showModal: false,
         loading:false
     }
 
     componentDidMount () {
+        this.props.initIngredients()
+
+        Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4', {
+            email: 'test1@test.com',
+            password: '123456',
+            returnSecureToken: true
+        })
+        .then(response=>{
+            return Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4'
+            , {
+    
+                idToken: response.data.idToken
+            })
+            // console.log(response)
+        }).then((res)=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
         
+
+        
+        // Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4', {
+        //     email: 'test1@test.com',
+        //     password: '123456',
+        //     role: ['CUD_Order'],
+        //     name: 'TEST',
+        //     gender: 'Male'
+        // })
+        // .then(response=>{
+        //     console.log(response)
+        // }).catch(err=>{
+        //     console.log(err)
+        // })
     }
 
     // purchasableHandler = (ingredients) => {
@@ -148,14 +180,8 @@ class BurgerBuilder extends Component {
         let burger = <Spinner />
         if(this.props.ing){
             burger = (
+                <>
                 <Burger  ingredients={this.props.ing}/>
-            )
-        }
-        
-        return(
-            <Aux>
-                {modal}
-                {burger}
                 <ToProvide.Provider value={{
                     added:(type) => this.props.addIngredient(type, this.props.price),
                     removed: (type) => this.props.removeIngredient(type, this.props.price),
@@ -164,7 +190,16 @@ class BurgerBuilder extends Component {
                     <BuildControls  price={this.props.price} 
                     purchasable={this.props.purchasable} 
                     orderNowClicked={this.showModalHandler}/>                
-                </ToProvide.Provider>    
+                </ToProvide.Provider>
+                </>    
+            )
+        }
+        
+        return(
+            <Aux>
+                {modal}
+                {burger}
+                
             </Aux>
         );        
     }
@@ -173,16 +208,17 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return{
-        ing: state.ingredients,
-        price: state.totalPrice,
-        purchasable : state.purchasable
+        ing: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        purchasable : state.burgerBuilder.purchasable
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
         addIngredient: (ingName,price) => dispatch(burgerBuilderActions.addIngredient(ingName,price)),
-        removeIngredient: (ingName, price) => dispatch(burgerBuilderActions.removeIngredient(ingName,price))
+        removeIngredient: (ingName, price) => dispatch(burgerBuilderActions.removeIngredient(ingName,price)),
+        initIngredients: () => dispatch(burgerBuilderActions.initIngredients())
     }
 }
 
