@@ -15,9 +15,6 @@ import Axios from 'axios';
 
 class BurgerBuilder extends Component {
     state = {
-        // ingredients:null,
-        // totalPrice:4,
-        // purchasable:false,
         showModal: false,
         loading:false
     }
@@ -33,7 +30,7 @@ class BurgerBuilder extends Component {
         .then(response=>{
             return Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4'
             , {
-                
+    
                 idToken: response.data.idToken
             })
             // console.log(response)
