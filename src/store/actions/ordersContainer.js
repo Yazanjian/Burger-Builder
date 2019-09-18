@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 const getOrders = (orders) => {
-    console.log('hello from orders store')
+    console.log(orders)
     return{
         type: actionTypes.GET_ORDERS,
         orders: orders
@@ -16,9 +16,9 @@ const getOrdersErr = () => {
     }
 }
 
-export const getOrdersInit = () => {
+export const getOrdersInit = (token) => {
     return dispatch => {
-        axios.get('/orders.json')
+        axios.get('/orders.json?auth=' + token )
         .then(response => {
             let fetchedOrders=[]; 
             for(let key in response.data){
