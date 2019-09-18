@@ -25,6 +25,19 @@ export const authFailed = (err) =>{
     }
 }
 
+export const authLogout = () => {
+    return{
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkingAuthTimeout = (timeToLogOut) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(authLogout());
+        }, timeToLogOut * 1000 );
+    }
+}
 
 export const authInit = (email, password, isSingUp) =>{
     return dispatch => {
@@ -42,6 +55,7 @@ export const authInit = (email, password, isSingUp) =>{
         .then(Response => {
             console.log(Response);
             dispatch(authSuccess(Response.data))
+            dispatch(checkingAuthTimeout(Response.data.expiresIn));
         })
         .catch(err => {
             console.log(err);
