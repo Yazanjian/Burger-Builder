@@ -1,13 +1,15 @@
 import React , {Component} from 'react';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import Button from '../../components/UI/button/button';
 import Input from '../../components/UI/Input/Input';
 import styles from './Auth.module.css';
 import Spinner from '../../components/UI/spinner/spinner';
 import * as actions from '../../store/actions/index';
-class Auth extends Component{ 
 
+var clickedDirectly = true;
+class Auth extends Component{ 
     state = {
         Controls: {
             email:
@@ -30,6 +32,19 @@ class Auth extends Component{
             }
         },
         isSignUp:true
+    }
+
+   
+
+    componentDidMount(){
+        if(this.props.location.state){//if this page was loading because of SIGN IN FIRST button which is located in BurgerBuilder container
+            //here we will redirect to check out directly 
+            clickedDirectly= false;
+        }
+        else{//if the page was loaded because of direct click on it 
+            // here we will return to burger builder as usual 
+            clickedDirectly= true;
+        }
     }
 
     inputChangeHandler = (event,key) => {
@@ -78,10 +93,21 @@ class Auth extends Component{
                    })}             
                    <Button btnType="Success"> SUBMIT </Button>  
            </form>
-        )
+        );
+
+        let redirectToHomePage = null ;
+        redirectToHomePage = (this.props.isAuth && clickedDirectly) 
+        ? <Redirect to="/" /> 
+        : (this.props.isAuth) 
+                            ? this.props.history.push({
+                                pathname: '/Checkout',
+                                state:{ingredients:this.props.ing , price:this.props.price}
+                            })
+                            :null
  
         return(
             <>  
+                {redirectToHomePage}
                 {this.props.loading ? <Spinner /> : 
                     <div className={styles.Auth}>
                         {form}
@@ -95,7 +121,10 @@ class Auth extends Component{
 const mapStateToProps = state => {
     return{
         loading:state.Auth.loading,
-        error :state.Auth.error
+        error :state.Auth.error,
+        isAuth: state.Auth.token,
+        ing: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
     }
 };
 

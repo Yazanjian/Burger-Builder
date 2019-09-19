@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+import { connect} from 'react-redux';
 
 import styles from './ContactData.module.css';
 import Button from '../../../components/UI/button/button';
@@ -74,7 +75,7 @@ class ContactData extends Component {
         loading:false
     }
 //hello
-    handleSubmition = (event) => {
+    handleSubmition = (event,token) => {
         event.preventDefault();
         
         this.setState({loading:true});
@@ -85,14 +86,17 @@ class ContactData extends Component {
         const order={
             ingredients: this.props.ingredients,
             price: this.props.price,
-            contactData:contactData
+            contactData:contactData,
+            userId:this.props.userId
             }
-        axios.post('/orders.json',order)
+        axios.post('/orders.json?auth=' + token,order)
         .then(Response => {
             this.setState({loading:false});
             this.props.history.push('/');
         })
         .catch(error => {
+            console.log(token)
+            console.log(error)
             this.setState({loading:false});
         })
     }
@@ -124,9 +128,9 @@ class ContactData extends Component {
             })
         };
 
-
+        // console.log(this.props.token);
         let form = (this.state.loading ? <Spinner /> :
-                 <form onSubmit={this.handleSubmition}>
+                 <form onSubmit={(event) => this.handleSubmition(event,this.props.token)}>
                     {formArray.map(configElement => {
                         return <Input 
                             key={configElement.id}
@@ -146,4 +150,12 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return{
+        token: state.Auth.token,
+        userId:state.Auth.userId
+    }
+};
+
+
+export default connect(mapStateToProps)(ContactData);

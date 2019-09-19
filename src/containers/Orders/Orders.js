@@ -26,7 +26,7 @@ class Orders extends Component {
         // .catch(err => {
         //     this.setState({loading:false})
         // })
-        this.props.getOrders(this.props.token);
+        this.props.getOrders(this.props.token,this.props.userId);
     }
 
     render(){ 
@@ -49,13 +49,14 @@ const mapStateToProps = state => {
     return{
         loading:state.orders.loading,
         orders:state.orders.orders,
-        token : state.Auth.token
+        token : state.Auth.token,
+        userId:state.Auth.userId
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return{
-        getOrders: (token) => dispatch(actions.getOrdersInit(token))
+        getOrders: (token,userId) => dispatch(actions.getOrdersInit(token, userId))
     }
 }
 
