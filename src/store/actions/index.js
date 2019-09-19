@@ -6,4 +6,4 @@ export {
 
 export {getOrdersInit} from './ordersContainer';
 
-export {authInit,authLogout} from './auth';
+export {authInit,authLogout,authcheckState} from './auth';

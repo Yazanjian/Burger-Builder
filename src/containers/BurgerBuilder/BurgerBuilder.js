@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Redirect} from 'react-router-dom';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
@@ -107,9 +108,17 @@ class BurgerBuilder extends Component {
     // } 
 
     showModalHandler = () => {
-        this.setState({
-            showModal : true
-        })
+        if(this.props.isAuthenticated){
+            this.setState({
+                showModal : true
+            })
+        }
+        else{
+            this.props.history.push({
+                pathname:'/Auth',
+                state:{prevPath: '/'}
+            })
+        }
     }
 
     hideModalHandler = () => {
@@ -147,6 +156,7 @@ class BurgerBuilder extends Component {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]));
         }
         const queryString = queryParams.join('&');
+        console.log(this.props.token);
         this.props.history.push({
             pathname: '/Checkout',
             state:{ingredients:this.props.ing , price:this.props.price}
@@ -189,7 +199,8 @@ class BurgerBuilder extends Component {
                     }}>                
                     <BuildControls  price={this.props.price} 
                     purchasable={this.props.purchasable} 
-                    orderNowClicked={this.showModalHandler}/>                
+                    orderNowClicked={this.showModalHandler}
+                    isAuth={this.props.isAuthenticated}/>                
                 </ToProvide.Provider>
                 </>    
             )
@@ -210,7 +221,9 @@ const mapStateToProps = state => {
     return{
         ing: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        purchasable : state.burgerBuilder.purchasable
+        purchasable : state.burgerBuilder.purchasable,
+        isAuthenticated: state.Auth.token !== null,
+        token: state.Auth.token
     }
 };
 
