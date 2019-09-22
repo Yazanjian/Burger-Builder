@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Redirect} from 'react-router-dom';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
@@ -9,7 +8,6 @@ import ToProvide from '../../context/toProvide';
 import Modal from '../../components/UI/modal/modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import Spinner from '../../components/UI/spinner/spinner';
-import * as actionTypes from '../../store/actions/actionTypes';
 import * as burgerBuilderActions from '../../store/actions/index';
 import Axios from 'axios';
 
@@ -36,7 +34,7 @@ class BurgerBuilder extends Component {
             })
             // console.log(response)
         }).then((res)=>{
-            console.log(res)
+            // console.log(res)
         })
         .catch(err=>{
             console.log(err)
@@ -155,8 +153,8 @@ class BurgerBuilder extends Component {
         for(let i in this.props.ing){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]));
         }
-        const queryString = queryParams.join('&');
-        console.log(this.props.token);
+        // const queryString = queryParams.join('&');
+        // console.log(this.props.token);
         this.props.history.push({
             pathname: '/Checkout',
             state:{ingredients:this.props.ing , price:this.props.price}
