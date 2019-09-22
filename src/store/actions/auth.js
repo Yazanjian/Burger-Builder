@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
-import logout from '../../containers/Auth/logout/logout';
 
 
 export const authStart = () =>{
