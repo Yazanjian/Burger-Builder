@@ -12,7 +12,7 @@ import * as burgerBuilderActions from '../../store/actions/index';
 import Axios from 'axios';
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         showModal: false,
         loading:false
