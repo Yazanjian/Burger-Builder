@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
 const getOrders = (orders) => {
-    console.log(orders)
+    // console.log(orders)
     return{
         type: actionTypes.GET_ORDERS,
         orders: orders
@@ -10,7 +10,7 @@ const getOrders = (orders) => {
 }
 
 const getOrdersErr = () => {
-    console.log('hello from error')
+    // console.log('hello from error')
     return{
         type:actionTypes.GET_ORDERS_ERROR
     }

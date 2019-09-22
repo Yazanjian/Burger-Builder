@@ -3,7 +3,6 @@ import {Route} from 'react-router-dom';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
-import { URLSearchParams } from 'url';
 class Checkout extends Component {
     state = {
         ingredients:{
@@ -20,7 +19,7 @@ class Checkout extends Component {
 
     continueCheckOutSummary = () => {
         this.props.history.replace('/Checkout/contact-data');
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     componentDidMount(){
@@ -45,7 +44,7 @@ class Checkout extends Component {
     }
 
     render(){
-        console.log(this.props.match.path)
+        // console.log(this.props.match.path)
         return(
             <div>
                 <CheckoutSummary

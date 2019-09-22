@@ -95,8 +95,8 @@ class ContactData extends Component {
             this.props.history.push('/');
         })
         .catch(error => {
-            console.log(token)
-            console.log(error)
+            // console.log(token)
+            // console.log(error)
             this.setState({loading:false});
         })
     }

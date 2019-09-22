@@ -9,7 +9,8 @@ const Order = (props) => {
     }
 
     const ingredientsToPrint = ingredients.map(item => {
-       return( <span 
+       return( <span
+            key={item.name} 
             style={{
             display:'inline-block',
             margin:'0px 8px',
