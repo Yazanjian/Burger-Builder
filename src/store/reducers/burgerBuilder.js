@@ -45,7 +45,7 @@ const reducer = (state = initialState, action ) => {
 
             if( state.ingredients[action.ingredientName] === 1) {
                 ingredientsArray.map(ingredient => {
-                    if(ingredient.key != action.ingredientName) {
+                    if(ingredient.key !== action.ingredientName) {
                         if(ingredient.value) purchasable=true
                     }
                 })    
