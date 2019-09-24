@@ -36,9 +36,11 @@ describe('login without being authenticated', () => {
         
         cy.url().should('include', '/Checkout')
 
+        //click continue button 
         cy.get('.button_Success__23eTu')
             .click()
         
+        //fill the fields with data
         cy.get('.Input_inputElement__THEmZ')
             .eq(0)
             .type('hello1')
@@ -55,7 +57,7 @@ describe('login without being authenticated', () => {
             .eq(4)
             .type('hello4@4.com')
 
-     
+        // find the order button in the form then click it to send the  data to server 
         cy.get('form').find('.button_Button__3cAgT').click()
     })
 
