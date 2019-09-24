@@ -21,24 +21,24 @@ export class BurgerBuilder extends Component {
     componentDidMount () {
         this.props.initIngredients()
 
-        Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4', {
-            email: 'test1@test.com',
-            password: '123456',
-            returnSecureToken: true
-        })
-        .then(response=>{
-            return Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4'
-            , {
+        // Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4', {
+        //     email: 'test1@test.com',
+        //     password: '123456',
+        //     returnSecureToken: true
+        // })
+        // .then(response=>{
+        //     return Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDmvciQVB6hI-NGRQzmXFPHvC4iZ6ZZCI4'
+        //     , {
     
-                idToken: response.data.idToken
-            })
-            // console.log(response)
-        }).then((res)=>{
-            // console.log(res)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        //         idToken: response.data.idToken
+        //     })
+        //     // console.log(response)
+        // }).then((res)=>{
+        //     // console.log(res)
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        // })
         
 
         

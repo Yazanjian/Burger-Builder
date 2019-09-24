@@ -1,14 +1,24 @@
 describe('login without being authenticated', () => {
     
     beforeEach(() => {
+        cy.server()
         cy.visit('/')
+        cy.route({
+            method: 'GET',      // Route all GET requests
+            url: '**',    // that have a URL that matches '/users/*'
+        }).as('ingredientsRequest')
+        // cy.wait('@ingredientsRequest')
     })
     
     it('should click ingredient button', () => {
         //adding ing
-        cy.get('.BuildControl_More__2jyEK')
-            .first()
-            .click()
+        // cy.get('.BuildControl_More__2jyEK')
+        //     .first()
+        //     .click()
+        cy.get('[data-test="Salad-more"]')
+        .click()
+
+       
 
         //click order now button
         cy.get('.BuildControls_OrderButton__3rncB')
