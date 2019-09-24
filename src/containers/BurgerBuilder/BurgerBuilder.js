@@ -212,9 +212,6 @@ export class BurgerBuilder extends Component {
             <Aux>
                 {modal}
                 {burger}
-                <input className="para" autoFocus /> 
-                <h1 className="titleBurger">Title For burger</h1>
-                <button className="justToTestPress" onClick={this.clickTestHandler}>click me</button>
             </Aux>
         );        
     }
