@@ -125,9 +125,9 @@ export class BurgerBuilder extends Component {
         })
     }
 
-    clickTestHandler = () => {
-        alert('clicked')
-    }
+    // clickTestHandler = () => {
+    //     alert('clicked')
+    // }
 
     purchasedContinueHandler = () => {
         // this.setState({loading:true});
