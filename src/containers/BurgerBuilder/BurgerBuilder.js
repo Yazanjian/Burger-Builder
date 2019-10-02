@@ -212,6 +212,7 @@ export class BurgerBuilder extends Component {
             <Aux>
                 {modal}
                 {burger}
+                <input className="myInput"></input>
             </Aux>
         );        
     }
